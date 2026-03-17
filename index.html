@@ -1,43 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abacaxi</title>
-    <script>
-        
-        const converter = () => {
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Receita</title>
 
-            const abacaxi = document.getElementById("abacaxi").value;
-            const convagua = abacaxi/1.5;
-            const convacucar = convagua/4;
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+    }
 
-            document.getElementById("agua").value = convagua.toFixed(0);
-            document.getElementById("acucar").value = convacucar.toFixed(0) ;
+    body {
+        background: #f5f6fa;
+        color: #2f3640;
+    }
 
+    header {
+    position: sticky;
+    top: 15px;
+    margin: 10px auto;
+    width: calc(100% - 30px);
+    max-width: 700px;
+
+    padding: 12px 20px;
+
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+
+    border-radius: 50px;
+
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+
+    main {
+    padding: 30px 20px;
+    max-width: 600px;
+    margin: auto;
+}
+
+    .grupo {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 14px;
+        color: #555;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        transition: 0.2s;
+    }
+
+    input:focus {
+        border-color: #4078ff;
+        outline: none;
+    }
+
+    input[readonly] {
+        background: #ecf0f1;
+    }
+
+    @media (min-width: 600px) {
+        .linha {
+            display: flex;
+            gap: 15px;
         }
-    </script>
+
+        .linha .grupo {
+            flex: 1;
+        }
+    }
+</style>
+
+<script>
+    const converter = () => {
+        const abacaxi = document.getElementById("abacaxi").value;
+
+        if (abacaxi === "") {
+            document.getElementById("agua").value = "";
+            document.getElementById("acucar").value = "";
+            return;
+        }
+
+        const convagua = abacaxi / 1.5;
+        const convacucar = convagua / 4;
+
+        document.getElementById("agua").value = convagua.toFixed(0);
+        document.getElementById("acucar").value = convacucar.toFixed(0);
+    }
+</script>
+
 </head>
+
 <body>
-    <div>
-        <p>Abacaxi em gramas:</p>
-        <input type="number" 
-        placeholder="Abacaxi em gramas" 
-        name="abacaxi" 
-        id="abacaxi"
-        onchange="converter()"
-        ></input>
+
+<header>
+    Calculadora dos Chup-Chup
+</header>
+
+<main>
+
+    <div class="grupo">
+        <label>Ingrediente base (g)</label>
+        <input type="number" id="abacaxi" placeholder="Digite a quantidade" oninput="converter()">
     </div>
-    
-    <div>
-        <p>Água em ml: </p>
-    <input type="number" readonly placeholder='Água em ml' name="agua" id="agua"></input>
+
+    <div class="linha">
+        <div class="grupo">
+            <label>Água (ml)</label>
+            <input type="number" id="agua" readonly>
+        </div>
+
+        <div class="grupo">
+            <label>Açúcar (g)</label>
+            <input type="number" id="acucar" readonly>
+        </div>
     </div>
-    
-    <div>
-        <p>Açucar em gramas: </p>
-<input type="number" readonly placeholder="Açúcar em gramas" name="acucar" id="acucar"></input>
-    </div>
-    
+
+</main>
+
 </body>
 </html>
