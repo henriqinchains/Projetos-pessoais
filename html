@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abacaxi</title>
+    <script>
+        
+        const converter = () => {
+
+            const abacaxi = document.getElementById("abacaxi").value;
+            const convagua = abacaxi/1.5;
+            const convacucar = convagua/4;
+
+            document.getElementById("agua").value = convagua.toFixed(2);
+            document.getElementById("acucar").value = convacucar.toFixed(2) ;
+
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <p>Abacaxi em gramas:</p>
+        <input type="number" 
+        placeholder="Abacaxi em gramas" 
+        name="abacaxi" 
+        id="abacaxi"
+        onchange="converter()"
+        ></input>
+    </div>
+    
+    <div>
+        <p>Água em ml: </p>
+    <input type="number" readonly placeholder='Água em ml' name="agua" id="agua"></input>
+    </div>
+    
+    <div>
+        <p>Açucar em gramas: </p>
+<input type="number" readonly placeholder="Açúcar em gramas" name="acucar" id="acucar"></input>
+    </div>
+    
+</body>
+</html>
