@@ -193,12 +193,12 @@
             return;
         }
 
-        const ratios = {
+        const proporcoes = {
             abacaxi: { agua: 1.5, acucar: 4 },
             manga: { agua: 1.66, acucar: 4 }
         };
 
-        const itens = ratios[saborSelecionado];
+        const itens = proporcoes[saborSelecionado];
         const convagua = quantidade / itens.agua;
         const convacucar = convagua / itens.acucar;
 
