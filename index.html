@@ -78,6 +78,86 @@
         background: #ecf0f1;
     }
 
+    .sabores {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+
+    .sabores #btnManga {
+        min-width: 120px;
+        padding: 12px 16px;
+        border: none;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #80e40e, #e69122, #e91506);
+        color: #fff;
+        font-weight: 700;
+        font-size: 16px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    }
+
+    .sabores #btnAbacaxi {
+        min-width: 120px;
+        padding: 12px 16px;
+        border: none;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #FAEEA1, #FFCB00,#FFCB00, #FAEEA1);
+        color: #fff;
+        font-weight: 700;
+        font-size: 16px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    }
+
+    .sabores button {
+        transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
+    }
+
+    .sabores #btnAbacaxi.active{
+        transform: scale(1.0);
+        box-shadow: 0 14px 18px rgba(248, 235, 49, 0.38);
+        opacity: 1;
+    }
+    .sabores #btnManga.active {
+        transform: scale(1.0);
+        box-shadow: 0 14px 18px rgba(255, 69, 0, 0.38);
+        opacity: 1;
+    }
+
+    .sabores #btnAbacaxi:not(.active) {
+        transform: scale(0.85) translateX(8px);
+        opacity: 0.6;
+    }
+
+    .sabores #btnManga:not(.active) {
+        transform: scale(0.9) translateX(-8px);
+        opacity: 0.7;
+    }
+
+    .sabores button:hover {
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 0 11px 20px rgba(0,0,0,0.2);
+        filter: brightness(1.05);
+    }
+
+    .sabores button:active {
+        transform: translateY(0);
+        box-shadow: 0 6px 10px rgba(0,0,0,0.2);
+    }
+
+    @media (max-width: 480px) {
+        .sabores button {
+            min-width: 140px;
+            font-size: 18px;
+            padding: 14px 18px;
+        }
+    }
+
     @media (min-width: 600px) {
         .linha {
             display: flex;
@@ -91,21 +171,51 @@
 </style>
 
 <script>
-    const converter = () => {
-        const abacaxi = document.getElementById("abacaxi").value;
+    let saborSelecionado = 'abacaxi';
 
-        if (abacaxi === "") {
-            document.getElementById("agua").value = "";
-            document.getElementById("acucar").value = "";
+    const setSaborSelecionado = (id) => {
+        saborSelecionado = id === 'btnManga' ? 'manga' : 'abacaxi';
+
+        document.getElementById('btnAbacaxi').classList.toggle('active', id === 'btnAbacaxi');
+        document.getElementById('btnManga').classList.toggle('active', id === 'btnManga');
+
+        document.getElementById('sabor').value = '';
+        document.getElementById('agua').value = '';
+        document.getElementById('acucar').value = '';
+
+    };
+
+    const converter = () => {
+        const quantidade = parseFloat(document.getElementById('sabor').value);
+        if (quantidade <= 0) {
+            document.getElementById('agua').value = '';
+            document.getElementById('acucar').value = '';
             return;
         }
 
-        const convagua = abacaxi / 1.5;
-        const convacucar = convagua / 4;
+        const ratios = {
+            abacaxi: { agua: 1.5, acucar: 4 },
+            manga: { agua: 1.66, acucar: 4 }
+        };
 
-        document.getElementById("agua").value = convagua.toFixed(0);
-        document.getElementById("acucar").value = convacucar.toFixed(0);
-    }
+        const itens = ratios[saborSelecionado];
+        const convagua = quantidade / itens.agua;
+        const convacucar = convagua / itens.acucar;
+
+        const round5 = (value) => Math.round(value / 5) * 5;
+
+        document.getElementById('agua').value = round5(convagua).toFixed(0);
+        document.getElementById('acucar').value = round5(convacucar).toFixed(0);
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+        setSaborSelecionado('btnAbacaxi');
+
+        document.getElementById('btnAbacaxi').addEventListener('click', () => setSaborSelecionado('btnAbacaxi'));
+        document.getElementById('btnManga').addEventListener('click', () => setSaborSelecionado('btnManga'));
+
+        document.getElementById('sabor').addEventListener('input', converter);
+    });
 </script>
 
 </head>
@@ -118,9 +228,13 @@
 
 <main>
 
+    <div class="sabores">
+        <button id="btnAbacaxi" name="btnAbacaxi">Abacaxi</button>
+        <button id="btnManga" name="btnManga">Manga</button>
+    </div>
     <div class="grupo">
         <label>Ingrediente base (g)</label>
-        <input type="number" id="abacaxi" placeholder="Digite a quantidade" oninput="converter()">
+        <input type="number" id="sabor" placeholder="Digite a quantidade" oninput="converter()">
     </div>
 
     <div class="linha">
