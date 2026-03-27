@@ -1,92 +1,91 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculadora de Receita</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora de Receita</title>
 
-<style>
-    * {
+    <style>
+      * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
         font-family: Arial, Helvetica, sans-serif;
-    }
+      }
 
-    body {
+      body {
         background: #f5f6fa;
         color: #2f3640;
-    }
+      }
 
-    header {
-    position: sticky;
-    top: 15px;
-    margin: 10px auto;
-    width: calc(100% - 30px);
-    max-width: 700px;
+      header {
+        position: sticky;
+        top: 15px;
+        margin: 10px auto;
+        width: calc(100% - 30px);
+        max-width: 700px;
 
-    padding: 12px 20px;
+        padding: 12px 20px;
 
-    text-align: center;
-    font-size: 18px;
-    font-weight: 600;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 600;
 
-    border-radius: 50px;
+        border-radius: 50px;
 
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
 
-    border: 1px solid rgba(255, 255, 255, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.3);
 
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-}
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      }
 
+      main {
+        padding: 30px 20px;
+        max-width: 600px;
+        margin: auto;
+      }
 
-    main {
-    padding: 30px 20px;
-    max-width: 600px;
-    margin: auto;
-}
-
-    .grupo {
+      .grupo {
         margin-bottom: 20px;
-    }
+      }
 
-    label {
+      label {
         display: block;
         margin-bottom: 6px;
         font-size: 14px;
         color: #555;
-    }
+      }
 
-    input {
+      input {
         width: 100%;
         padding: 12px;
         font-size: 16px;
         border: 1px solid #ccc;
         border-radius: 6px;
         transition: 0.2s;
-    }
+      }
 
-    input:focus {
+      input:focus {
         border-color: #4078ff;
         outline: none;
-    }
+      }
 
-    input[readonly] {
+      input[readonly] {
         background: #ecf0f1;
-    }
+      }
 
-    .sabores {
+      .sabores {
         display: flex;
         justify-content: center;
         gap: 12px;
         flex-wrap: wrap;
         margin-bottom: 20px;
-    }
+      }
 
-    .sabores #btnManga {
+      .sabores #btnManga {
         min-width: 120px;
         padding: 12px 16px;
         border: none;
@@ -95,161 +94,410 @@
         color: #fff;
         font-weight: 700;
         font-size: 16px;
-        box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
         cursor: pointer;
-        transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
-    }
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          filter 0.2s ease;
+      }
 
-    .sabores #btnAbacaxi {
+      .sabores #btnAbacaxi {
         min-width: 120px;
         padding: 12px 16px;
         border: none;
         border-radius: 12px;
-        background: linear-gradient(135deg, #FAEEA1, #FFCB00,#FFCB00, #FAEEA1);
+        background: linear-gradient(135deg, #faeea1, #ffdc4e, #ffdd53, #faeea1);
         color: #fff;
         font-weight: 700;
         font-size: 16px;
-        box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
         cursor: pointer;
-        transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
-    }
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          filter 0.2s ease;
+      }
 
-    .sabores button {
-        transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
-    }
+      .sabores #btnAbacate {
+        min-width: 120px;
+        padding: 12px 16px;
+        border: none;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #024610, #466906, #344e02);
+        color: #fff;
+        font-weight: 700;
+        font-size: 16px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          filter 0.2s ease;
+      }
 
-    .sabores #btnAbacaxi.active{
-        transform: scale(1.0);
+      .sabores #btnGoiaba {
+        min-width: 120px;
+        padding: 12px 16px;
+        border: none;
+        border-radius: 12px;
+        background: linear-gradient(
+          90deg,
+          #a8b145,
+          #fbb483,
+          #f35b53,
+          #f35b53,
+          #f35b53,
+          #fbb483,
+          #a8b145
+        );
+        color: #fff;
+        font-weight: 700;
+        font-size: 16px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          filter 0.2s ease;
+      }
+
+      .sabores #btnMorango {
+        min-width: 120px;
+        padding: 12px 16px;
+        border: none;
+        border-radius: 12px;
+        background: linear-gradient(
+          75deg,
+          #d12d10,
+          #cc0707d7,
+          #cc0707d7,
+          #466906
+        );
+        color: #fff;
+        font-weight: 700;
+        font-size: 16px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          filter 0.2s ease;
+      }
+
+      .sabores #btnMelancia {
+        min-width: 120px;
+        padding: 12px 16px;
+        border: none;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #ff3e3e, #e9635e, #ff6060);
+        color: #fff;
+        font-weight: 700;
+        font-size: 16px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          filter 0.2s ease;
+      }
+
+      .sabores #btnMaracuja {
+        min-width: 120px;
+        padding: 12px 16px;
+        border: none;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #f8b502, #ffcc3f);
+        color: #fff;
+        font-weight: 700;
+        font-size: 16px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          filter 0.2s ease;
+      }
+
+      .sabores button {
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          filter 0.2s ease,
+          opacity 0.2s ease;
+      }
+
+      .sabores #btnAbacaxi.active {
+        transform: scale(1);
         box-shadow: 0 14px 18px rgba(248, 235, 49, 0.38);
         opacity: 1;
-    }
-    .sabores #btnManga.active {
-        transform: scale(1.0);
+      }
+      .sabores #btnManga.active {
+        transform: scale(1);
         box-shadow: 0 14px 18px rgba(255, 69, 0, 0.38);
         opacity: 1;
-    }
+      }
+      .sabores #btnAbacate.active {
+        transform: scale(1);
+        box-shadow: 0 14px 18px rgba(2, 75, 2, 0.38);
+        opacity: 1;
+      }
+      .sabores #btnMorango.active {
+        transform: scale(1);
+        box-shadow: 0 14px 18px rgba(248, 49, 49, 0.815);
+        opacity: 1;
+      }
+      .sabores #btnGoiaba.active {
+        transform: scale(1);
+        box-shadow: 0 14px 18px rgb(216, 107, 130);
+        opacity: 1;
+      }
 
-    .sabores #btnAbacaxi:not(.active) {
-        transform: scale(0.85) translateX(8px);
-        opacity: 0.6;
-    }
-
-    .sabores #btnManga:not(.active) {
-        transform: scale(0.9) translateX(-8px);
+      .sabores #btnAbacaxi:not(.active) {
+        transform: scale(0.9);
         opacity: 0.7;
-    }
+      }
 
-    .sabores button:hover {
+      .sabores #btnMaracuja.active {
+        transform: scale(1);
+        box-shadow: 0 14px 18px rgba(255, 208, 1, 0.38);
+        opacity: 1;
+      }
+
+      .sabores #btnMaracuja:not(.active) {
+        transform: scale(0.9);
+        opacity: 0.7;
+      }
+
+      .sabores #btnMelancia.active {
+        transform: scale(1);
+        box-shadow: 0 14px 18px rgba(201, 83, 83, 0.986);
+        opacity: 1;
+      }
+
+      .sabores #btnMelancia:not(.active) {
+        transform: scale(0.9);
+        opacity: 0.7;
+      }
+
+      .sabores #btnGoiaba:not(.active) {
+        transform: scale(0.9);
+        opacity: 0.7;
+      }
+
+      .sabores #btnMorango:not(.active) {
+        transform: scale(0.9);
+        opacity: 0.7;
+      }
+
+      .sabores #btnManga:not(.active) {
+        transform: scale(0.9);
+        opacity: 0.7;
+      }
+
+      .sabores #btnAbacate:not(.active) {
+        transform: scale(0.9);
+        opacity: 0.7;
+      }
+
+      .sabores button:hover {
         transform: translateY(-2px) scale(1.05);
-        box-shadow: 0 11px 20px rgba(0,0,0,0.2);
+        box-shadow: 0 11px 20px rgba(0, 0, 0, 0.2);
         filter: brightness(1.05);
-    }
+      }
 
-    .sabores button:active {
+      .sabores button:active {
         transform: translateY(0);
-        box-shadow: 0 6px 10px rgba(0,0,0,0.2);
-    }
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+      }
 
-    @media (max-width: 480px) {
+      @media (max-width: 480px) {
         .sabores button {
-            min-width: 140px;
-            font-size: 18px;
-            padding: 14px 18px;
+          min-width: 140px;
+          font-size: 18px;
+          padding: 14px 18px;
         }
-    }
+      }
 
-    @media (min-width: 600px) {
+      @media (min-width: 600px) {
         .linha {
-            display: flex;
-            gap: 15px;
+          display: flex;
+          gap: 15px;
         }
 
         .linha .grupo {
-            flex: 1;
+          flex: 1;
         }
-    }
-</style>
+      }
+    </style>
 
-<script>
-    let saborSelecionado = 'abacaxi';
+    <script>
+      let saborSelecionado = "abacaxi";
 
-    const setSaborSelecionado = (id) => {
-        saborSelecionado = id === 'btnManga' ? 'manga' : 'abacaxi';
+      const setSaborSelecionado = (id) => {
+        saborSelecionado =
+          id === "btnManga"
+            ? "manga"
+            : id === "btnAbacate"
+              ? "abacate"
+              : id === "btnMorango"
+                ? "morango"
+                : id === "btnGoiaba"
+                  ? "goiaba"
+                  : id === "btnMaracuja"
+                    ? "maracuja"
+                    : id === "btnMelancia"
+                      ? "melancia"
+                      : id === "btnAbacaxi"
+                        ? "abacaxi"
+                        : "abacaxi";
 
-        document.getElementById('btnAbacaxi').classList.toggle('active', id === 'btnAbacaxi');
-        document.getElementById('btnManga').classList.toggle('active', id === 'btnManga');
+        document
+          .getElementById("btnAbacaxi")
+          .classList.toggle("active", id === "btnAbacaxi");
+        document
+          .getElementById("btnManga")
+          .classList.toggle("active", id === "btnManga");
+        document
+          .getElementById("btnAbacate")
+          .classList.toggle("active", id === "btnAbacate");
+        document
+          .getElementById("btnMorango")
+          .classList.toggle("active", id === "btnMorango");
+        document
+          .getElementById("btnGoiaba")
+          .classList.toggle("active", id === "btnGoiaba");
+        document
+          .getElementById("btnGoiaba")
+          .classList.toggle("active", id === "btnGoiaba");
+        document
+          .getElementById("btnGoiaba")
+          .classList.toggle("active", id === "btnGoiaba");
+        document
+          .getElementById("btnMaracuja")
+          .classList.toggle("active", id === "btnMaracuja");
+        document
+          .getElementById("btnMelancia")
+          .classList.toggle("active", id === "btnMelancia");
 
-        document.getElementById('sabor').value = '';
-        document.getElementById('agua').value = '';
-        document.getElementById('acucar').value = '';
+        document.getElementById("sabor").value = "";
+        document.getElementById("agua").value = "";
+        document.getElementById("acucar").value = "";
 
-    };
+        // Se abacate estiver selecionado, label base muda para leite.
+        document.getElementById("base").innerText =
+          saborSelecionado === "abacate" ? "Leite (ml)" : "Água (ml)";
+      };
 
-    const converter = () => {
-        const quantidade = parseFloat(document.getElementById('sabor').value);
+      const converter = () => {
+        const quantidade = parseFloat(document.getElementById("sabor").value);
         if (quantidade <= 0) {
-            document.getElementById('agua').value = '';
-            document.getElementById('acucar').value = '';
-            return;
+          document.getElementById("agua").value = "";
+          document.getElementById("acucar").value = "";
+          document.getElementById("liga").value = "";
+          return;
         }
 
         const proporcoes = {
-            abacaxi: { agua: 1.5, acucar: 4 },
-            manga: { agua: 1.66, acucar: 4 }
+          abacaxi: { agua: 1.5, acucar: 4 },
+          manga: { agua: 1.66, acucar: 4 },
+          abacate: { agua: 0.6, acucar: 3.3333, liga: 0.0333 },
+          morango: { agua: 1, acucar: 3.3333 },
+          goiaba: { agua: 0.6666, acucar: 4 },
+          maracuja: { agua: 0.47619, acucar: 4.7727 },
+          melancia: { agua: 0, acucar: 12.5 },
         };
 
         const itens = proporcoes[saborSelecionado];
         const convagua = quantidade / itens.agua;
         const convacucar = convagua / itens.acucar;
+        const convleite = quantidade / itens.leite;
 
-        const round5 = (value) => Math.round(value / 5) * 5;
+        document.getElementById("agua").value = convagua.toFixed(0);
+        document.getElementById("acucar").value = convacucar.toFixed(0);
 
-        document.getElementById('agua').value = round5(convagua).toFixed(0);
-        document.getElementById('acucar').value = round5(convacucar).toFixed(0);
-    };
+        if (saborSelecionado === "melancia") {
+          document.getElementById("agua").value = "";
+          document.getElementById("acucar").value = convacucar.toFixed(0);
+        }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        setSaborSelecionado('btnAbacaxi');
+        if (itens.liga) {
+          const convliga = quantidade * itens.liga;
+          document.getElementById("liga").value = convliga.toFixed(0);
+        } else {
+          document.getElementById("liga").value = "";
+        }
+      };
 
-        document.getElementById('btnAbacaxi').addEventListener('click', () => setSaborSelecionado('btnAbacaxi'));
-        document.getElementById('btnManga').addEventListener('click', () => setSaborSelecionado('btnManga'));
+      document.addEventListener("DOMContentLoaded", () => {
+        setSaborSelecionado("btnAbacaxi");
 
-        document.getElementById('sabor').addEventListener('input', converter);
-    });
-</script>
+        document
+          .getElementById("btnAbacaxi")
+          .addEventListener("click", () => setSaborSelecionado("btnAbacaxi"));
+        document
+          .getElementById("btnManga")
+          .addEventListener("click", () => setSaborSelecionado("btnManga"));
+        document
+          .getElementById("btnAbacate")
+          .addEventListener("click", () => setSaborSelecionado("btnAbacate"));
+        document
+          .getElementById("btnMorango")
+          .addEventListener("click", () => setSaborSelecionado("btnMorango"));
+        document
+          .getElementById("btnGoiaba")
+          .addEventListener("click", () => setSaborSelecionado("btnGoiaba"));
+        document
+          .getElementById("btnMaracuja")
+          .addEventListener("click", () => setSaborSelecionado("btnMaracuja"));
+        document
+          .getElementById("btnMelancia")
+          .addEventListener("click", () => setSaborSelecionado("btnMelancia"));
 
-</head>
+        document.getElementById("sabor").addEventListener("input", converter);
+      });
+    </script>
+  </head>
 
-<body>
+  <body>
+    <header>Calculadora dos Chup-Chup</header>
 
-<header>
-    Calculadora dos Chup-Chup
-</header>
-
-<main>
-
-    <div class="sabores">
+    <main>
+      <div class="sabores">
         <button id="btnAbacaxi" name="btnAbacaxi">Abacaxi</button>
+        <button id="btnMaracuja" name="btnMaracuja">Maracujá</button>
         <button id="btnManga" name="btnManga">Manga</button>
-    </div>
-    <div class="grupo">
+        <button id="btnMorango" name="btnMorango">Morango</button>
+        <button id="btnMelancia" name="btnMelancia">Melancia</button>
+        <button id="btnGoiaba" name="btnGoiaba">Goiaba</button>
+        <button id="btnAbacate" name="btnAbacate">Abacate</button>
+      </div>
+      <div class="grupo">
         <label>Ingrediente base (g)</label>
-        <input type="number" id="sabor" placeholder="Digite a quantidade" oninput="converter()">
-    </div>
+        <input
+          type="number"
+          id="sabor"
+          placeholder="Digite a quantidade"
+          oninput="converter()"
+        />
+      </div>
 
-    <div class="linha">
+      <div class="linha">
         <div class="grupo">
-            <label>Água (ml)</label>
-            <input type="number" id="agua" readonly>
+          <label id="base">Água (ml)</label>
+          <input type="number" id="agua" readonly />
         </div>
 
         <div class="grupo">
-            <label>Açúcar (g)</label>
-            <input type="number" id="acucar" readonly>
+          <label>Açúcar (g)</label>
+          <input type="number" id="acucar" readonly />
         </div>
-    </div>
 
-</main>
-
-</body>
+        <div class="grupo">
+          <label>Liga neutra (g)</label>
+          <input type="number" id="liga" readonly />
+        </div>
+      </div>
+    </main>
+  </body>
 </html>
